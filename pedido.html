@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montar Pedido - Loja de Açaí</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Montar Pedido</h1>
+    </header>
+    <main>
+        <section class="order">
+            <h2>Escolha seu Açaí</h2>
+            <form id="order-form">
+                <label for="acai-type">Tipo de Açaí:</label>
+                <select id="acai-type" name="acai-type" required>
+                    <option value="Açaí Tradicional - R$18,00">Açaí Tradicional - R$18,00</option>
+                    <option value="Açaí com Granola - R$20,00">Açaí com Granola - R$20,00</option>
+                    <option value="Açaí com Banana - R$22,00">Açaí com Banana - R$22,00</option>
+                    <option value="Açaí com Morango - R$24,00">Açaí com Morango - R$24,00</option>
+                    <option value="Açaí com Nutella - R$26,00">Açaí com Nutella - R$26,00</option>
+                </select>
+                <a href="confirmacao.html" class="order-button" id="confirm-order">Confirmar Pedido</a>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Loja de Açaí. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.getElementById('confirm-order').addEventListener('click', function() {
+            const acaiType = document.getElementById('acai-type').value;
+            localStorage.setItem('acaiType', acaiType);
+        });
+    </script>
+</body>
+</html>

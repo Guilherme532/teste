@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Pedido - Loja de Açaí</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Confirmação de Pedido</h1>
+    </header>
+    <main>
+        <section class="confirmation">
+            <h2>Complete seu Pedido</h2>
+            <form id="confirmation-form">
+                <p id="selected-acai"></p>
+                
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="address">Endereço:</label>
+                <input type="text" id="address" name="address" required>
+                
+                <label for="payment-method">Método de Pagamento:</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="Pix">Pix - 31996512842</option>
+                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                    <option value="Cartão de Débito">Cartão de Débito</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
+                
+                <div id="change-section" style="display: none;">
+                    <label for="change">Troco para quanto?</label>
+                    <input type="text" id="change" name="change">
+                </div>
+                
+                <button type="submit">Confirmar Pedido</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Loja de Açaí. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectedAcai = localStorage.getItem('acaiType');
+            document.getElementById('selected-acai').textContent = `Você escolheu: ${selectedAcai}`;
+            
+            document.getElementById('payment-method').addEventListener('change', function() {
+                const paymentMethod = this.value;
+                const changeSection = document.getElementById('change-section');
+                if (paymentMethod === 'Dinheiro') {
+                    changeSection.style.display = 'block';
+                } else {
+                    changeSection.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('confirmation-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const name = document.getElementById('name').value;
+                const address = document.getElementById('address').value;
+                const paymentMethod = document.getElementById('payment-method').value;
+                const change = document.getElementById('change').value;
+                const acaiType = selectedAcai;
+
+                let message = `Nome: ${name}%0aEndereço: ${address}%0aTipo de Açaí: ${acaiType}%0aMétodo de Pagamento: ${paymentMethod}`;
+                if (paymentMethod === 'Dinheiro') {
+                    message += `%0aTroco para: ${change}`;
+                }
+
+                const whatsappUrl = `https://wa.me/5531996512842?text=${message}`;
+                window.location.href = whatsappUrl;
+            });
+        });
+    </script>
+</body>
+</html>
